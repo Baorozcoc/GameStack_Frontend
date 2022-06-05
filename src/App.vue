@@ -9,7 +9,13 @@ import { RouterLink, RouterView } from "vue-router";
         <RouterLink to="/"
           ><img src="./assets/GameStackMini.png" class="logo"
         /></RouterLink>
-        <input type="text" placeholder="Busca un juego" class="search" />
+        <input
+          type="text"
+          placeholder="Busca un juego"
+          class="search"
+          v-model="Busqueda"
+        />
+        <img src="./assets/search.svg" class="searchButton" @click="Buscar()" />
         <div v-if="UserID == 'nothing'">
           <RouterLink to="/login"
             ><a class="Button">Inicia Sesión</a></RouterLink
@@ -33,7 +39,10 @@ import { RouterLink, RouterView } from "vue-router";
 </template>
 <script>
 export default {
-  data: () => ({ UserID: "KudKun" }),
+  data: () => ({ UserID: "KudKun", Busqueda: "" }),
+  methods: {
+    Buscar: function () {},
+  },
 };
 </script>
 
@@ -76,6 +85,14 @@ html {
   border-style: solid;
   border-radius: 14px;
 }
+.searchButton {
+  position: absolute;
+  left: 59%;
+  background-color: #00ffb9;
+  border-radius: 10px;
+  width: 35px;
+  cursor: pointer;
+}
 .logo {
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
@@ -111,7 +128,8 @@ html {
 .greenB {
   width: 28px;
   height: 28px;
-  background-color: #00c591;
+  background-color: #00ffb9;
+  border: 1px solid black;
   margin-right: 20px;
   border-radius: 20px;
   display: inline-block;
@@ -125,8 +143,12 @@ html {
   color: #000;
 }
 @media screen and (max-width: 800px) {
-  .username{
-    font-size: 5vw;
+  .username {
+    font-size: 24px;
+  }
+  .greenB {
+    width: 24px;
+    height: 24px;
   }
 }
 </style>

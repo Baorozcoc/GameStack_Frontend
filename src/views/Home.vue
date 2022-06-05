@@ -49,9 +49,15 @@
       <div class="bar"></div>
       <div class="flex2">
         <div>Videojuegos Subidos</div>
-        <div class="filter">
+        <!--div class="filter">
           Ordenar por <img src="../assets/dropdown.png" class="logo" />
-        </div>
+        </div-->
+        <select name="select" class="filter">
+          <option value="value1">Más reciente</option>
+          <option value="value2">Más antiguo</option>
+          <option value="value3">Mejor votado</option>
+          <option value="value4">Ultimos subidos</option>
+        </select>
       </div>
       <div class="flexwrap">
         <RouterLink to="/videogame"
@@ -210,7 +216,7 @@ html {
   font-size: 1.5vw;
   font-weight: 300;
   background-color: #3a3a3a;
-  width: 14vw;
+  width: 18vw;
   padding: 5px;
   color: white;
   display: flex;
