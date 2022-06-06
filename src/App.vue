@@ -27,7 +27,7 @@ import { RouterLink, RouterView } from "vue-router";
         <div v-else>
           <RouterLink to="/user" class="username">
             <div class="greenB"></div>
-            {{ UserID }}</RouterLink
+            {{ Username }}</RouterLink
           >
         </div>
       </div>
@@ -39,7 +39,7 @@ import { RouterLink, RouterView } from "vue-router";
 </template>
 <script>
 export default {
-  data: () => ({ UserID: "KudKun", Busqueda: "" }),
+  data: () => ({ UserID: "aisdhuñuhsad032196as129g9", Username:"KudKun", Busqueda: "" }),
   methods: {
     Buscar: function () {},
   },

@@ -24,7 +24,7 @@
       </div>
       <div class="reseñas">
         <div v-for="reseña in reseñas" :key="reseña.id" class="reseña">
-          <b class="vg">{{ reseña.videogame }}</b> {{ reseña.createdat }} <br />
+          <RouterLink to="/videogame"><b class="vg">{{ reseña.videogame }}</b></RouterLink> {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 0
@@ -174,6 +174,7 @@ html {
 }
 .vg {
   color: #00ffb9;
+  cursor:pointer;
 }
 .iconos {
   display: flex;

@@ -12,15 +12,32 @@
           <div class="Puntuacion">{{ puntuacion }}</div>
           <div>
             <b>Categorías: </b>
-            <div v-for="categoria in categorias" :key="categoria">
-              - {{ categoria }}
+            <div v-for="categoria in categorias" :key="categoria" class="preference">
+              {{ categoria }}
             </div>
           </div>
         </div>
       </div>
       <div class="reseñas">
+        <div v-if="username!=''" class="reseña" >
+          <b v-if="crearReseña==false" class="user" @click="nuevaReseña()">Deja tu reseña aquí</b>
+          <form action="form" @submit.prevent="login" v-else>
+            <label>Ingresa tu reseña!</label> <br>
+            <input 
+              v-model="reseñaUsuario"
+              class="inputReseña"
+              type="text"
+              required
+              placeholder="Reseña"/>
+            <div class="iconos">
+              <input class="Button" type="submit" value="Publicar" @click="CrearReseña()"/>
+              <button class="Button" @click="nuevaReseña()">Cancelar</button>
+            </div>
+            
+          </form>
+        </div>
         <div v-for="reseña in reseñas" :key="reseña.id" class="reseña">
-          <b class="user">{{ reseña.user }}</b> {{ reseña.createdat }} <br />
+          <RouterLink to="/user"><b class="user">{{ reseña.user }}</b></RouterLink> {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 0
@@ -42,6 +59,9 @@ export default {
       "Es un videojuego de disparos en primera persona (FPS) de la compañía de videojuegos Crytek y distribuido por Ubisoft, editado para PC, y después (pero con el nombre Far Cry Instincts) en Xbox, y por último, con el nombre Farcry Classic, en PlayStation 3 y Xbox 360 (jugable en Xbox One mediante la retrocompatibilidad). Dispone de un modo multijugador en línea y de una aventura en modo individual, aunque en su última versión son dos las campañas para un jugador. El videojuego fue presentado en el E3 2004, y cosechó muy buenas críticas en aspectos como el apartado gráfico o la inteligencia artificial.",
     categorias: ["Accion", "Shooter"],
     puntuacion: 5.0,
+    crearReseña: false,
+    reseñaUsuario: "",
+    username: "KudKun",
     reseñas: [
       {
         reviewid: 1,
@@ -74,6 +94,18 @@ export default {
       },
     ],
   }),
+  methods: {
+    nuevaReseña: function () {
+      this.crearReseña=!this.crearReseña;
+      this.reseñaUsuario="";
+    },
+    CrearReseña: function () {
+      //Aqui se manda la petición de nueva reseña con 
+      //this.reseñaUsuario, this.UserID(global) y this.titulo
+      this.crearReseña=!this.crearReseña;
+      this.reseñaUsuario="";
+    },
+  }
 };
 </script>
 <style scoped lang="scss">
@@ -152,6 +184,16 @@ html {
   font-family: Arial;
   color: black;
 }
+.preference {
+  background: #3a3a3a;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+  display: block;
+  //margin: 2px 20px;
+  color: white;
+  border: 2px solid white;
+}
 .reseñas {
   //background-color: blue;
   margin-top: 15vh;
@@ -172,6 +214,7 @@ html {
 }
 .user {
   color: #00ffb9;
+  cursor: pointer;
 }
 .iconos {
   display: flex;
@@ -185,6 +228,16 @@ html {
   margin-left: 10px;
   margin-right: 2px;
 }
+.inputReseña{
+  background-color: #3a3a3a;
+  margin-top:10px;
+  width: 90%;
+  padding: 6px;
+  //border-radius: 5px;
+  border: 1px solid white;
+  color:white;
+}
+
 @media screen and (max-width: 1200px) {
   .centralComponent {
     margin: 0 2vw;

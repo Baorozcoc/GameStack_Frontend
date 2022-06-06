@@ -213,10 +213,11 @@ html {
   font-family: Arial;
 }
 .filter {
-  font-size: 1.5vw;
+  font-size: 1.4vw;
   font-weight: 300;
   background-color: #3a3a3a;
   width: 18vw;
+  min-width: 150px;
   padding: 5px;
   color: white;
   display: flex;
@@ -245,8 +246,21 @@ html {
 }
 @media screen and (max-width: 800px) {
   .listP {
-    width: 30%;
-    height: 25vw;
+    width: 40%;
+    height: 45vw;
+  }
+  .filter{
+    font-size: 14px;
+  }
+  .centralComponent {
+    margin: 0 2vw;
+    width: 92%;
+  }
+  .flex2{
+    font-size: 20px;
+  }
+  .description{
+    font-size: 14px;
   }
 }
 .listP:hover {
