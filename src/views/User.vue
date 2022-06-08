@@ -8,7 +8,8 @@
           class="Portada"
         />
         <div class="Data">
-          <div class="titulo">{{ user.username }}</div>
+          <!--div class="titulo">{{ user.username }}</div-->
+          <div class="titulo">{{ $route.params._id }}</div>
           <div><b>Preferencias</b></div>
           <br />
           <div class="preferences">
@@ -24,7 +25,11 @@
       </div>
       <div class="reseñas">
         <div v-for="reseña in reseñas" :key="reseña.id" class="reseña">
-          <RouterLink to="/videogame"><b class="vg">{{ reseña.videogame }}</b></RouterLink> {{ reseña.createdat }} <br />
+          <RouterLink
+            :to="{ name: 'videogame', params: { id: reseña.videogame } }"
+            ><b class="vg">{{ reseña.videogame }}</b></RouterLink
+          >
+          {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 0
@@ -62,14 +67,14 @@ export default {
         reviewid: 2,
         content: "El mejor juego que haya jugado nunca",
         user: "RetroGamer",
-        videogame: "farcry1",
+        videogame: "farcry2",
         createdat: "2022-06-04",
       },
       {
         reviewid: 3,
         content: "Valoro mucho el sonido del juego :D ",
         user: "xxGamerxx",
-        videogame: "farcry1",
+        videogame: "farcry3",
         createdat: "2022-06-04",
       },
       {
@@ -77,11 +82,14 @@ export default {
         content:
           "Meh, podría ser mejor, me gusta la capacidad que tiene la empresa para innovar, pero no es suficiente para destacar",
         user: "Playernator16",
-        videogame: "farcry1",
+        videogame: "farcry4",
         createdat: "2022-06-04",
       },
     ],
   }),
+  //Aquí debe haber un metodo que cargue antes de montar la pagina,
+  //Que haga la petición de Traer usuario por ID con parametro "$route.params._id"
+  //Y tambien otra peticion que traiga las reseñas por ID del usuario con el mismo parametro
 };
 </script>
 <style scoped lang="scss">

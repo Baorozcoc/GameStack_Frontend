@@ -5,7 +5,8 @@
       <div class="Info">
         <img src="@/assets/1.jpg" alt="Videojuego" class="Portada" />
         <div class="Data">
-          <div class="titulo">{{ titulo }}</div>
+          <!--div class="titulo">{{ titulo }}</div-->
+          <div class="titulo">{{ $route.params.id }}</div>
           <div>{{ descripcion }}</div>
         </div>
         <div>
@@ -37,7 +38,7 @@
           </form>
         </div>
         <div v-for="reseña in reseñas" :key="reseña.id" class="reseña">
-          <RouterLink to="/user"><b class="user">{{ reseña.user }}</b></RouterLink> {{ reseña.createdat }} <br />
+          <RouterLink :to="{name: 'user', params: {_id: reseña.user}}"><b class="user">{{ reseña.user }}</b></RouterLink> {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 0

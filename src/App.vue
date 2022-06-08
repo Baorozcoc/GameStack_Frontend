@@ -25,7 +25,10 @@ import { RouterLink, RouterView } from "vue-router";
           >
         </div>
         <div v-else>
-          <RouterLink to="/user" class="username">
+          <RouterLink
+            :to="{ name: 'user', params: { _id: Username } }"
+            class="username"
+          >
             <div class="greenB"></div>
             {{ Username }}</RouterLink
           >
@@ -39,9 +42,19 @@ import { RouterLink, RouterView } from "vue-router";
 </template>
 <script>
 export default {
-  data: () => ({ UserID: "aisdhuñuhsad032196as129g9", Username:"KudKun", Busqueda: "" }),
+  data: () => ({
+    UserID: "aisdhuñuhsad032196as129g9",
+    Username: "KudKun",
+    Busqueda: "",
+  }),
   methods: {
-    Buscar: function () {},
+    Buscar: function () {
+      this.$router.push({ name: "search", params: { termino: this.Busqueda } });
+      this.Busqueda=""; 
+    },
+
+    //Aqui debe haber una función que cargue el usuario desde LocalStorage y lo ponga en
+    //Las variables designadas para ello en data.
   },
 };
 </script>

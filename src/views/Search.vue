@@ -2,6 +2,7 @@
   <div class="Search">
     <div class="centralComponent">
       <h1>SEARCH</h1>
+      <h3>Los resultados de busqueda para el termino: "{{ $route.params.termino }}" son:</h3>
     </div>
   </div>
 </template>

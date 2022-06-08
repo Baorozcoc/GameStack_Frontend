@@ -60,31 +60,31 @@
         </select>
       </div>
       <div class="flexwrap">
-        <RouterLink to="/videogame"
+        <RouterLink :to="{ name: 'videogame', params: { id: 'Zelda' } }"
           ><img src="@/assets/4.jpg" alt="Videojuego" class="listP"
         /></RouterLink>
-        <RouterLink to="/videogame"
+        <RouterLink :to="{ name: 'videogame', params: { id: 'Farcry' } }"
           ><img src="@/assets/1.jpg" alt="Videojuego" class="listP"
         /></RouterLink>
-        <RouterLink to="/videogame"
+        <RouterLink :to="{ name: 'videogame', params: { id: 'Bioshock' } }"
           ><img src="@/assets/2.jpg" alt="Videojuego" class="listP"
         /></RouterLink>
-        <RouterLink to="/videogame"
+        <RouterLink :to="{ name: 'videogame', params: { id: 'Watch Dogs' } }"
           ><img src="@/assets/7.jpg" alt="Videojuego" class="listP"
         /></RouterLink>
-        <RouterLink to="/videogame"
+        <RouterLink :to="{ name: 'videogame', params: { id: 'SuperSmashBros' } }"
           ><img src="@/assets/6.jpg" alt="Videojuego" class="listP"
         /></RouterLink>
-        <RouterLink to="/videogame"
+        <RouterLink :to="{ name: 'videogame', params: { id: 'Metroid' } }"
           ><img src="@/assets/5.jpg" alt="Videojuego" class="listP"
         /></RouterLink>
-        <RouterLink to="/videogame"
+        <RouterLink :to="{ name: 'videogame', params: { id: 'MarioOdissey' } }"
           ><img src="@/assets/3.jpg" alt="Videojuego" class="listP"
         /></RouterLink>
-        <RouterLink to="/videogame"
+        <RouterLink :to="{ name: 'videogame', params: { id: 'MetroidPrime' } }"
           ><img src="@/assets/5.jpg" alt="Videojuego" class="listP"
         /></RouterLink>
-        <RouterLink to="/videogame"
+        <RouterLink :to="{ name: 'videogame', params: { id: 'Farcry' } }"
           ><img src="@/assets/1.jpg" alt="Videojuego" class="listP"
         /></RouterLink>
       </div>
@@ -153,7 +153,7 @@ export default {
       }
     },
     RedirectVG: function (){
-      this.$router.push({ name: "videogame" }).catch((err) => {});
+      this.$router.push({ name: 'videogame', params: { id: 'Farcry' } }).catch((err) => {});
     }
   },
 };
