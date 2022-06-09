@@ -244,8 +244,7 @@ export default {
       this.title = title;
       this.index = index;
     },
-    RedirectVG: function () {
-      //Función que redigire al juego en el Slider
+    RedirectVG: function () {//Función que redigire al juego en el Slider
       this.$router
         .push({
           name: "videogame",
@@ -262,14 +261,17 @@ export default {
         })
         .catch((err) => {});
     },
-    GetImage: function (value) {
-      //Función que muestra las imagenes dinamicamente
+    GetImage: function (value) {//Muestra imgs de portada
       return this.videojuegos[value].screenshots[0];
     },
-    GetBanner: function (value) {
-      //Función que muestra las imagenes dinamicamente
+    GetBanner: function (value) {//Muestra imgs de banner
       return this.videojuegos[value].cover;
     },
+    //Aquí hay que hacer una función que traiga todos los videojuegos y los almacene en 
+    //this.videojuegos, además que coja entre 4 y 8 juegos aleatorios entre this.videojuegos 
+    //(o puede ser los 4-8 primeros) y los almacene en this.videojuegosSlider
+
+    //La función que los organiza por selector queda como deuda tecnica por ahora
   },
 };
 </script>

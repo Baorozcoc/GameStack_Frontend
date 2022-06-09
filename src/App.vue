@@ -16,7 +16,7 @@ import { RouterLink, RouterView } from "vue-router";
           v-model="Busqueda"
         />
         <img src="./assets/search.svg" class="searchButton" @click="Buscar()" />
-        <div v-if="UserID == 'nothing'">
+        <div v-if="id == ''">
           <RouterLink to="/login"
             ><a class="Button">Inicia Sesión</a></RouterLink
           >
@@ -24,14 +24,9 @@ import { RouterLink, RouterView } from "vue-router";
             ><a class="Button">Registrate</a></RouterLink
           >
         </div>
-        <div v-else>
-          <RouterLink
-            :to="{ name: 'user', params: { _id: Username } }"
-            class="username"
-          >
-            <div class="greenB"></div>
-            {{ Username }}</RouterLink
-          >
+        <div v-else class="username" @click="RedirectUser()">
+          <div class="greenB"></div>
+          {{ username }}
         </div>
       </div>
     </header>
@@ -43,18 +38,35 @@ import { RouterLink, RouterView } from "vue-router";
 <script>
 export default {
   data: () => ({
-    UserID: "nothing",
-    Username: "KudKun",
+    id: "",
+    email: "",
+    username: "KudKun",
+    password: "",
+    role: "",
+    gamePreferences: ["Action", "Adventure"],
+    v: 0,
     Busqueda: "",
   }),
   methods: {
     Buscar: function () {
       this.$router.push({ name: "search", params: { termino: this.Busqueda } });
-      this.Busqueda=""; 
+      this.Busqueda = "";
     },
-
+    RedirectUser: function () {
+      this.$router
+        .push({
+          name: "user",
+          params: {
+            id: this.id,
+            username: this.username,
+            v: this.v,
+            gamePreferences: this.gamePreferences,
+          },
+        })
+        .catch((err) => {});
+    },
     //Aqui debe haber una función que cargue el usuario desde LocalStorage y lo ponga en
-    //Las variables designadas para ello en data.
+    //las variables designadas para ello en data y se llama cada vez que se cambia de vista
   },
 };
 </script>
@@ -164,4 +176,5 @@ html {
     height: 24px;
   }
 }
+//Falta: Responsive Design, Cerrar sesión y otras opciones
 </style>

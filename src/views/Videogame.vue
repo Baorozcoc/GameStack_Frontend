@@ -3,42 +3,61 @@
     <div class="centralComponent">
       <img :src="$route.params.cover" alt="Videojuego" class="bannerP" />
       <div class="Info">
-        <img :src="$route.params.screenshots[0]" alt="Videojuego" class="Portada" />
+        <img
+          :src="$route.params.screenshots[0]"
+          alt="Videojuego"
+          class="Portada"
+        />
         <div class="Data">
           <!--div class="titulo">{{ titulo }}</div-->
           <div class="titulo">{{ $route.params.title }}</div>
+          <b>{{ $route.params.pubdate }}</b>
           <div>{{ $route.params.description }}</div>
         </div>
         <div>
           <div class="Puntuacion">{{ $route.params.score }}</div>
           <div>
             <b>Categorías: </b>
-            <div v-for="(categoria,index) in $route.params.idcategories" :key="index" class="preference">
+            <div
+              v-for="(categoria, index) in $route.params.idcategory"
+              :key="index"
+              class="preference"
+            >
               {{ categorias[categoria] }}
             </div>
           </div>
         </div>
       </div>
       <div class="reseñas">
-        <div v-if="username!=''" class="reseña" >
-          <b v-if="crearReseña==false" class="user" @click="nuevaReseña()">Deja tu reseña aquí</b>
+        <div v-if="username != ''" class="reseña">
+          <b v-if="crearReseña == false" class="user" @click="nuevaReseña()"
+            >Deja tu reseña aquí</b
+          >
           <form action="form" @submit.prevent="login" v-else>
-            <label>Ingresa tu reseña!</label> <br>
-            <input 
+            <label>Ingresa tu reseña!</label> <br />
+            <input
               v-model="reseñaUsuario"
               class="inputReseña"
               type="text"
               required
-              placeholder="Reseña"/>
+              placeholder="Reseña"
+            />
             <div class="iconos">
-              <input class="Button" type="submit" value="Publicar" @click="CrearReseña()"/>
+              <input
+                class="Button"
+                type="submit"
+                value="Publicar"
+                @click="CrearReseña()"
+              />
               <button class="Button" @click="nuevaReseña()">Cancelar</button>
             </div>
-            
           </form>
         </div>
         <div v-for="reseña in reseñas" :key="reseña.id" class="reseña">
-          <RouterLink :to="{name: 'user', params: {_id: reseña.user}}"><b class="user">{{ reseña.user }}</b></RouterLink> {{ reseña.createdat }} <br />
+          <b class="user" @click="RedirectUser(reseña.user)">{{
+            reseña.user
+          }}</b
+          >{{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 0
@@ -60,7 +79,7 @@
 export default {
   name: "Videogame",
   data: () => ({
-    categorias: ["Accion", "Shooter"],
+    categorias: ["Accion", "Shooter", "Guerra"],
     crearReseña: false,
     reseñaUsuario: "",
     username: "KudKun",
@@ -98,16 +117,32 @@ export default {
   }),
   methods: {
     nuevaReseña: function () {
-      this.crearReseña=!this.crearReseña;
-      this.reseñaUsuario="";
+      this.crearReseña = !this.crearReseña;
+      this.reseñaUsuario = "";
     },
     CrearReseña: function () {
-      //Aqui se manda la petición de nueva reseña con 
+      //Aqui se manda la petición de nueva reseña con
       //this.reseñaUsuario, this.UserID(global) y this.titulo
-      this.crearReseña=!this.crearReseña;
-      this.reseñaUsuario="";
+      this.crearReseña = !this.crearReseña;
+      this.reseñaUsuario = "";
     },
-  }
+    RedirectUser: function (UserID) {
+      //Esta función captura el ID del usuario, debe hacer la petición de traer al usuario
+      //Con ese nombre, y luego se hace el router.push con la información traida de la
+      //peticion
+      this.$router
+        .push({
+          name: "user",
+          params: {
+            id: UserID,
+            username: UserID,
+            v: 0,
+            gamePreferences: ["Acción", "Peleas"],
+          },
+        })
+        .catch((err) => {});
+    },
+  },
 };
 </script>
 <style scoped lang="scss">
@@ -230,14 +265,14 @@ html {
   margin-left: 10px;
   margin-right: 2px;
 }
-.inputReseña{
+.inputReseña {
   background-color: #3a3a3a;
-  margin-top:10px;
+  margin-top: 10px;
   width: 90%;
   padding: 6px;
   //border-radius: 5px;
   border: 1px solid white;
-  color:white;
+  color: white;
 }
 
 @media screen and (max-width: 1200px) {

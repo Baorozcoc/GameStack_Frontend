@@ -19,12 +19,12 @@ const router = createRouter({
       component: () => import("../views/Register.vue"),
     },
     {
-      path: "/user/:_id",// ID del usuario como parametro
+      path: "/user/:id",// ID del usuario como parametro
       name: "user",
       component: () => import("../views/User.vue"),
     },
     {
-      path: "/videogame/:id",//Id del videojuego como parametro
+      path: "/videogame/:title",//Id del videojuego como parametro
       name: "videogame",
       component: () => import("../views/Videogame.vue"),
     },

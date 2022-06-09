@@ -2,19 +2,14 @@
   <div class="User">
     <div class="centralComponent">
       <div class="Info">
-        <img
-          src="https://dthezntil550i.cloudfront.net/f4/latest/f41908291942413280009640715/1280_960/1b2d9510-d66d-43a2-971a-cfcbb600e7fe.png"
-          alt="Perfil"
-          class="Portada"
-        />
         <div class="Data">
           <!--div class="titulo">{{ user.username }}</div-->
-          <div class="titulo">{{ $route.params._id }}</div>
+          <div class="titulo">{{ $route.params.username }}</div>
           <div><b>Preferencias</b></div>
           <br />
           <div class="preferences">
             <div
-              v-for="pref in user.gamePreferences"
+              v-for="pref in $route.params.gamePreferences"
               :key="pref.id"
               class="preference"
             >
@@ -25,7 +20,7 @@
       </div>
       <div class="reseñas">
         <div v-for="reseña in reseñas" :key="reseña.id" class="reseña">
-          <b class="vg" @click="RedirectVG()">{{ reseña.videogame }}</b>
+          <b class="vg" @click="RedirectVG(reseña.videogame)">{{ reseña.videogame }}</b>
           {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">
@@ -42,16 +37,6 @@
 export default {
   name: "User",
   data: () => ({
-    videogamesP: ["1", "2", "3", "4", "5", "6"],
-    user: {
-      _id: "123",
-      email: "paquito@gmail.com",
-      username: "KudKun",
-      password: "123456",
-      role: "User",
-      gamePreferences: ["Acción", "Estrategia", "Shooters"],
-      _v: 0,
-    },
     reseñas: [
       {
         reviewid: 1,
@@ -83,10 +68,34 @@ export default {
         createdat: "2022-06-04",
       },
     ],
+    fondos:["@/assets/GIFWPP1.gif","@/assets/GIFWPP2.gif","@/assets/GIFWPP3.gif","@/assets/GIFWPP4.gif","@/assets/GIFWPP5.gif"], //Para uso futuro, cambiar dinamicamente el fondo
   }),
-  //Aquí debe haber un metodo que cargue antes de montar la pagina,
-  //Que haga la petición de Traer usuario por ID con parametro "$route.params._id"
-  //Y tambien otra peticion que traiga las reseñas por ID del usuario con el mismo parametro
+  //Aquí debe haber un metodo que traiga las reseñas por ID del usuario con 
+  //parametro "$route.params.id"
+  methods:{
+    RedirectVG: function(idVG){
+      //Aqui se toma el ID del videojuego, con este se busca el videojuego y se trae
+      //Luego se manda cada uno de sus atributos como parametro por la función
+      //comentada a continuación, cambiando el "this.video..." por el videojuego que traemos
+      /*
+        this.$router
+        .push({
+          name: "videogame",
+          params: {
+            id: this.videojuegosSlider[this.index].id,
+            title: this.videojuegosSlider[this.index].title,
+            description: this.videojuegosSlider[this.index].description,
+            idcategory: this.videojuegosSlider[this.index].idcategory,
+            cover: this.videojuegosSlider[this.index].cover,
+            screenshots: this.videojuegosSlider[this.index].screenshots,
+            pubdate: this.videojuegosSlider[this.index].pubdate,
+            score: this.videojuegosSlider[this.index].score,
+          },
+        })
+        .catch((err) => {});
+      */
+    }
+  }
 };
 </script>
 <style scoped lang="scss">
