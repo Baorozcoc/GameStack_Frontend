@@ -29,7 +29,7 @@ export default {
         variables: {
           inputUser: {
             username: username,
-            password: parseInt(password,10),
+            password: password,
             email: email,
             role: "User",
             gamePreferences: [],
@@ -50,12 +50,12 @@ export default {
     return axios.post(
       ENDPOINT_PATH,
       {
-        query: `query Query($email: String!, $password: Int!){
+        query: `query Query($email: String!, $password: String!){
                 getExists(email: $email, password: $password)
               }`,
         variables: {
           email: email,
-          password: parseInt(password,10),
+          password: password,
         },
       },
       {

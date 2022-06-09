@@ -1,13 +1,16 @@
 <template>
   <div class="Search">
     <div class="centralComponent">
-      <div class="Button" @click="RealizarPeticion()">Presiona aquí para realizar la petición</div>
+      <div class="Button" @click="RealizarPeticion()">
+        Presiona aquí para realizar la petición
+      </div>
       <div v-if="respuesta != ''">
         <h3>Los resultados de la petición son:</h3>
-        <h6>{{ status }}</h6>
-        
+        <div v-for="(resp,index) in respuesta" :key="index">
+            {{resp.content}}
+        </div>
       </div>
-      <h6>{{ respuesta }}</h6>
+      <h6>{{ respuesta.value }}</h6>
       <p id="Respuesta"></p>
     </div>
   </div>
@@ -16,67 +19,34 @@
 export default {
   name: "Request",
   data: () => ({
-    status:0,
-    respuesta: {},
+    respuesta:"",
   }),
   methods: {
     RealizarPeticion: function () {
       var url = "https://gamestack-soap-e3wbalmwuq-uc.a.run.app/REST/interdata";
       console.log("Entró a la petición");
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", url);
+      //xhr.responseType = 'json';
+      xhr.open("GET", url, true);
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           console.log(xhr.status);
           //this.status=xhr.status;
           console.log(xhr.responseText);
-          //this.respuesta=xhr.responseText;
-          document.getElementById("Respuesta").innerHTML=xhr.responseText;
+          var archivo=JSON.parse(xhr.responseText);
+          console.log(archivo);
+          this.respuesta={...archivo.value};
+          console.log(this.respuesta);
+          console.log(this.respuesta[0]);
+          console.log(this.respuesta.value);
+          document.getElementById("Respuesta").innerHTML = archivo;
         }
       };
 
       xhr.send();
     },
-    xmlToJson: function( xml ) {
-        
-        // Create the return object
-        var obj = {};
-        
-        if ( xml.nodeType == 1 ) { // element
-            // do attributes
-            if ( xml.attributes.length > 0 ) {
-            obj["@attributes"] = {};
-            for ( var j = 0; j < xml.attributes.length; j++ ) {
-                var attribute = xml.attributes.item( j );
-                obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
-            }
-            }
-        } else if ( xml.nodeType == 3 ) { // text
-            obj = xml.nodeValue;
-        }
-        
-        // do children
-        if ( xml.hasChildNodes() ) {
-            for( var i = 0; i < xml.childNodes.length; i++ ) {
-            var item = xml.childNodes.item(i);
-            var nodeName = item.nodeName;
-            if ( typeof(obj[nodeName] ) == "undefined" ) {
-                obj[nodeName] =this.xmlToJson( item );
-            } else {
-                if ( typeof( obj[nodeName].push ) == "undefined" ) {
-                var old = obj[nodeName];
-                obj[nodeName] = [];
-                obj[nodeName].push( old );
-                }
-                obj[nodeName].push(this.xmlToJson( item ) );
-            }
-            }
-        }
-        return obj;
-    },
-    }
-  
+  },
 };
 </script>
 <style scoped lang="scss">

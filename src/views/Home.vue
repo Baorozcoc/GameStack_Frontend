@@ -275,7 +275,11 @@ export default {
     //(o puede ser los 4-8 primeros) y los almacene en this.videojuegosSlider
     //La función que los organiza por selector queda como deuda tecnica por ahora
     //loadGames: 
+<<<<<<< Updated upstream
     getAllGames() {
+=======
+    getAllGames: function() {
+>>>>>>> Stashed changes
     const games =  axios.post(
       ENDPOINT_PATH,
       {
