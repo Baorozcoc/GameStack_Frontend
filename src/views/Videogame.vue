@@ -1,20 +1,20 @@
 <template>
   <div class="Videogame">
     <div class="centralComponent">
-      <img src="@/assets/1_1.jpg" alt="Videojuego" class="bannerP" />
+      <img :src="$route.params.cover" alt="Videojuego" class="bannerP" />
       <div class="Info">
-        <img src="@/assets/1.jpg" alt="Videojuego" class="Portada" />
+        <img :src="$route.params.screenshots[0]" alt="Videojuego" class="Portada" />
         <div class="Data">
           <!--div class="titulo">{{ titulo }}</div-->
-          <div class="titulo">{{ $route.params.id }}</div>
-          <div>{{ descripcion }}</div>
+          <div class="titulo">{{ $route.params.title }}</div>
+          <div>{{ $route.params.description }}</div>
         </div>
         <div>
-          <div class="Puntuacion">{{ puntuacion }}</div>
+          <div class="Puntuacion">{{ $route.params.score }}</div>
           <div>
             <b>Categorías: </b>
-            <div v-for="categoria in categorias" :key="categoria" class="preference">
-              {{ categoria }}
+            <div v-for="(categoria,index) in $route.params.idcategories" :key="index" class="preference">
+              {{ categorias[categoria] }}
             </div>
           </div>
         </div>
@@ -51,15 +51,16 @@
   </div>
 </template>
 <script>
+/*{
+            cover: this.videojuegosSlider[index].cover,
+            screenshots: this.videojuegosSlider[index].screenshots,
+            pubdate: this.videojuegosSlider[index].pubdate,
+            score: this.videojuegosSlider[index].score,
+          }*/
 export default {
   name: "Videogame",
   data: () => ({
-    videogamesP: ["1", "2", "3", "4", "5", "6"],
-    titulo: "FarCry",
-    descripcion:
-      "Es un videojuego de disparos en primera persona (FPS) de la compañía de videojuegos Crytek y distribuido por Ubisoft, editado para PC, y después (pero con el nombre Far Cry Instincts) en Xbox, y por último, con el nombre Farcry Classic, en PlayStation 3 y Xbox 360 (jugable en Xbox One mediante la retrocompatibilidad). Dispone de un modo multijugador en línea y de una aventura en modo individual, aunque en su última versión son dos las campañas para un jugador. El videojuego fue presentado en el E3 2004, y cosechó muy buenas críticas en aspectos como el apartado gráfico o la inteligencia artificial.",
     categorias: ["Accion", "Shooter"],
-    puntuacion: 5.0,
     crearReseña: false,
     reseñaUsuario: "",
     username: "KudKun",

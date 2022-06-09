@@ -25,10 +25,7 @@
       </div>
       <div class="reseñas">
         <div v-for="reseña in reseñas" :key="reseña.id" class="reseña">
-          <RouterLink
-            :to="{ name: 'videogame', params: { id: reseña.videogame } }"
-            ><b class="vg">{{ reseña.videogame }}</b></RouterLink
-          >
+          <b class="vg" @click="RedirectVG()">{{ reseña.videogame }}</b>
           {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">

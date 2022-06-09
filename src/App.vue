@@ -43,7 +43,7 @@ import { RouterLink, RouterView } from "vue-router";
 <script>
 export default {
   data: () => ({
-    UserID: "aisdhuñuhsad032196as129g9",
+    UserID: "nothing",
     Username: "KudKun",
     Busqueda: "",
   }),

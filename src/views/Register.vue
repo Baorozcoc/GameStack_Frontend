@@ -79,9 +79,12 @@ export default {
         console.log("Creado");
         auth.setUserLogged(user);
         this.$router.push("/");
+        //Aqui se debe guardar el usuario en LocalStorage para cargarlo en la barra de navegación
+        this.error=false;
       } catch (error) {
         console.log("No creado");
         console.log(error);
+        this.error=true;
       }
     },
   },
@@ -94,22 +97,34 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  font-family: Arial;
 }
 .backg {
   height: 91vh;
 }
 .containerRegister {
   background-color: white;
-  height: 70vh;
+  //height: 70vh;
   border-radius: 10px;
   align-items: center;
   padding: 20px;
   width: 40%;
 }
+@media screen and (max-width: 1200px) {
+  .containerRegister{
+    position: absolute;
+    min-width: 400px;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  .backg{
+    width:100vw;
+    max-width:700px;
+  }
+}
 h1 {
   text-align: center;
   font-size: 25px;
-  font-family: Arial;
+  
 }
 .formulario {
   display: flex;
@@ -137,5 +152,11 @@ h1 {
   border-style: solid;
   border-radius: 2px;
   margin-top: 10px;
+}
+.error{
+  background-color: rgb(173, 0, 0);
+  padding:4px;
+  color:white;
+  text-align: center;
 }
 </style>
