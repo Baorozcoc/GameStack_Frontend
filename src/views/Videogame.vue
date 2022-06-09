@@ -57,7 +57,7 @@
           <b class="user" @click="RedirectUser(reseña.user)">{{
             reseña.user
           }}</b
-          >{{ reseña.createdat }} <br />
+          > {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 0

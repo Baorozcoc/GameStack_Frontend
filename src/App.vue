@@ -38,7 +38,7 @@ import { RouterLink, RouterView } from "vue-router";
 <script>
 export default {
   data: () => ({
-    id: "",
+    id: "2",
     email: "",
     username: "KudKun",
     password: "",
@@ -166,6 +166,7 @@ html {
   display: flex;
   text-decoration: none;
   color: #000;
+  cursor:pointer;
 }
 @media screen and (max-width: 800px) {
   .username {

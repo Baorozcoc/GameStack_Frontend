@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "home", 
+      name: "home",
       component: () => import("../views/Home.vue"),
     },
     {
@@ -19,24 +19,29 @@ const router = createRouter({
       component: () => import("../views/Register.vue"),
     },
     {
-      path: "/user/:id",// ID del usuario como parametro
+      path: "/user/:id", // ID del usuario como parametro
       name: "user",
       component: () => import("../views/User.vue"),
     },
     {
-      path: "/videogame/:title",//Id del videojuego como parametro
+      path: "/videogame/:title", //Id del videojuego como parametro
       name: "videogame",
       component: () => import("../views/Videogame.vue"),
     },
     {
-      path: "/gamelist",//Id del usuario como parametro
-      name: "gamelist", 
+      path: "/gamelist", //Id del usuario como parametro
+      name: "gamelist",
       component: () => import("../views/Gamelist.vue"),
     },
     {
-      path: "/search/:termino",//termino de busqueda como parametro
+      path: "/search/:termino", //termino de busqueda como parametro
       name: "search",
       component: () => import("../views/Search.vue"),
+    },
+    {
+      path: "/request",
+      name: "request",
+      component: () => import("../views/Request.vue"),
     },
   ],
 });
