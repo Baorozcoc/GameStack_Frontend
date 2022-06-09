@@ -272,8 +272,38 @@ export default {
     //(o puede ser los 4-8 primeros) y los almacene en this.videojuegosSlider
     //La función que los organiza por selector queda como deuda tecnica por ahora
     //loadGames: 
+    getAllGames(title) {
+    const games =  axios.post(
+      ENDPOINT_PATH,
+      {
+        query: `query GetUserByUsername {
+            getAllVideogames {
+              Id
+              score
+              pubdate
+              screenshots
+              cover
+              idcategory
+              description
+              title
+            }
+          }`,//Parametros del objeto encontrado a devolver
+        variables: {
+        },
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization":token,
+        },
+      }
+    );  
+    this.videojuegos = games;                                     ;
   },
-  
+  },
+  mounted() {
+    this.getAllGames();
+  },
 };
 </script>
 <style lang="scss">
