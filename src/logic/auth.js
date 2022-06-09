@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 //API de prueba, reemplazar con el gateway cuando funcionen las peticiones
 const ENDPOINT_PATH = "https://users-ms-image-fblpqjm3fq-uc.a.run.app/";
-
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU'
 export default {
   setUserLogged(userLogged) {
     Cookies.set("userLogged", userLogged);
@@ -28,7 +28,7 @@ export default {
         variables: {
           inputUser: {
             username: username,
-            password: parseInt(password, 10),
+            password: password,
             email: email,
             role: "User",
             gamePreferences: [],
@@ -36,8 +36,10 @@ export default {
         },
       },
       {
+        //hay que agregar 
         headers: {
           "Content-Type": "application/json",
+          "Authorization": token,
         },
       }
     );
@@ -52,12 +54,13 @@ export default {
               }`,
         variables: {
           email: email,
-          password: parseInt(password, 10),
+          password: password,
         },
       },
       {
         headers: {
           "Content-Type": "application/json",
+          "Authorization": token,
         },
       }
     );

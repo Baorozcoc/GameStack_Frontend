@@ -1,45 +1,22 @@
-register(username,password,email){
-    return axios.post(
-        ENDPOINT_PATH,{
-        query: `mutation Mutation($inputUser: userInput) {
-            createUser(inputUser: $inputUser){
-                username
-                password
-                email
-                role
-                gamePreferences
-                _id
-            }
-        }`,
-        variables:{
-            inputUser:{
-                username: username,
-                password: password,
-                email: email,
-                role: "User",
-                gamePreferences: [],
-            },
-        }
-    },{
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-},
-existance(email,password){
-    //NO MODIFICAR, SOLO SE USA PARA VALIDAR EL LOGIN EN LA BD
-    return axios.post(ENDPOINT_PATH,{
-        query: `query Query($email: String!, $password: Int!){
-            getExists(email: $email, password: $password)
-          }`,
-          variables: {
-              email: email,
-              password: password,
-          }
-        },{
-            headers:{
-                'Content-Type': 'application/json'
-            }
-         
-    })
+`
+Obtener un juego mediante su titulo.
+query Query($videogameTittle: String!) {
+  getVideogameByTittle(videogameTittle: $videogameTittle) {
+    Id
+    title
+    description
+    idcategory
+    cover
+    screenshots
+    pubdate
+    score
+  }
 }
+variables
+{
+  "videogameTittle": "William_esta_monda_aun_no_sirve"
+}
+`
+
+//endpoint con proxy
+//https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/
