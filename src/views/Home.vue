@@ -73,9 +73,11 @@
 
 <script>
 import auth from "../logic/auth";
+const ENDPOINT_PATH = "https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/";
 export default {
   name: "Home",
   data: () => ({
+    
     videojuegosSlider: [
       {
         id: "juego1",
@@ -231,6 +233,7 @@ export default {
     title: "",
     description: "",
     index:0,
+    
   }),
   components: {},
   computed: {
@@ -272,7 +275,7 @@ export default {
     //(o puede ser los 4-8 primeros) y los almacene en this.videojuegosSlider
     //La función que los organiza por selector queda como deuda tecnica por ahora
     //loadGames: 
-    getAllGames(title) {
+    getAllGames() {
     const games =  axios.post(
       ENDPOINT_PATH,
       {
