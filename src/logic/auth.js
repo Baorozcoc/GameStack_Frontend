@@ -2,7 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 //API de prueba, reemplazar con el gateway cuando funcionen las peticiones
-const ENDPOINT_PATH = "https://users-ms-image-fblpqjm3fq-uc.a.run.app/";
+//const ENDPOINT_PATH = "https://users-ms-image-fblpqjm3fq-uc.a.run.app/";
+const ENDPOINT_PATH = "https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/";
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU'
 export default {
   setUserLogged(userLogged) {
