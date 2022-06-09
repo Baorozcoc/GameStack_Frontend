@@ -4,13 +4,11 @@
       <div class="Button" @click="RealizarPeticion()">
         Presiona aquí para realizar la petición
       </div>
-      <div v-if="respuesta != ''">
-        <h3>Los resultados de la petición son:</h3>
-        <div v-for="(resp,index) in respuesta" :key="index">
-            {{resp.content}}
-        </div>
-      </div>
-      <h6>{{ respuesta.value }}</h6>
+      <h3>Los resultados de la petición son:</h3>
+      <!--div v-for="(resp,index) in respuesta" :key="index">
+            {{resp}}
+      </div-->
+      <div>{{respuesta}}</div>
       <p id="Respuesta"></p>
     </div>
   </div>
@@ -24,27 +22,27 @@ export default {
   methods: {
     RealizarPeticion: function () {
       var url = "https://gamestack-soap-e3wbalmwuq-uc.a.run.app/REST/interdata";
-      console.log("Entró a la petición");
+      //console.log("Entró a la petición");
       var xhr = new XMLHttpRequest();
       //xhr.responseType = 'json';
       xhr.open("GET", url, true);
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
-          console.log(xhr.status);
+          //console.log(xhr.status);
           //this.status=xhr.status;
-          console.log(xhr.responseText);
+          //console.log(xhr.responseText);
           var archivo=JSON.parse(xhr.responseText);
-          console.log(archivo);
+          //console.log(archivo);
           this.respuesta={...archivo.value};
-          console.log(this.respuesta);
-          console.log(this.respuesta[0]);
-          console.log(this.respuesta.value);
-          document.getElementById("Respuesta").innerHTML = archivo;
+          //console.log(this.respuesta);
+          //console.log(this.respuesta[0]);
+          document.getElementById("Respuesta").innerHTML = xhr.responseText;
         }
       };
 
       xhr.send();
+      console.log(this.respuesta);
     },
   },
 };

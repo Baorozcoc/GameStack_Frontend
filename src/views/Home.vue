@@ -68,16 +68,21 @@
       </div>
       <div v-if="userLogged">Bienvenido:{{ userLogged }}</div>
     </div>
+    <RouterLink to="/request"
+      ><button class="Button2">Vista Especial</button></RouterLink
+    >
   </div>
 </template>
 
 <script>
 import auth from "../logic/auth";
+import axios from "axios";
 const ENDPOINT_PATH = "https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/";
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU";
 export default {
   name: "Home",
   data: () => ({
-    
     videojuegosSlider: [
       {
         id: "juego1",
@@ -232,8 +237,7 @@ export default {
     ],
     title: "",
     description: "",
-    index:0,
-    
+    index: 0,
   }),
   components: {},
   computed: {
@@ -247,7 +251,8 @@ export default {
       this.title = title;
       this.index = index;
     },
-    RedirectVG: function () {//Función que redigire al juego en el Slider
+    RedirectVG: function () {
+      //Función que redigire al juego en el Slider
       this.$router
         .push({
           name: "videogame",
@@ -264,26 +269,24 @@ export default {
         })
         .catch((err) => {});
     },
-    GetImage: function (value) {//Muestra imgs de portada
+    GetImage: function (value) {
+      //Muestra imgs de portada
       return this.videojuegos[value].screenshots[0];
     },
-    GetBanner: function (value) {//Muestra imgs de banner
+    GetBanner: function (value) {
+      //Muestra imgs de banner
       return this.videojuegos[value].cover;
     },
-    //Aquí hay que hacer una función que traiga todos los videojuegos y los almacene en 
-    //this.videojuegos, además que coja entre 4 y 8 juegos aleatorios entre this.videojuegos 
+    //Aquí hay que hacer una función que traiga todos los videojuegos y los almacene en
+    //this.videojuegos, además que coja entre 4 y 8 juegos aleatorios entre this.videojuegos
     //(o puede ser los 4-8 primeros) y los almacene en this.videojuegosSlider
     //La función que los organiza por selector queda como deuda tecnica por ahora
-    //loadGames: 
-<<<<<<< Updated upstream
-    getAllGames() {
-=======
-    getAllGames: function() {
->>>>>>> Stashed changes
-    const games =  axios.post(
-      ENDPOINT_PATH,
-      {
-        query: `query GetUserByUsername {
+    //loadGames:
+    getAllGames: function () {
+      var games = axios.get(
+        ENDPOINT_PATH,
+        {
+          query: `query GetUserByUsername {
             getAllVideogames {
               Id
               score
@@ -294,23 +297,22 @@ export default {
               description
               title
             }
-          }`,//Parametros del objeto encontrado a devolver
-        variables: {
+          }`, //Parametros del objeto encontrado a devolver
+          variables: {},
         },
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization":token,
-        },
-      }
-    );  
-    this.videojuegos = games;                                     ;
-  },
-  },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      );
+      this.videojuegos = games;
+    },
+  } /*
   mounted() {
-    this.getAllGames();
-  },
+    this.getAllGames();*/,
+  //},
 };
 </script>
 <style lang="scss">
@@ -322,6 +324,28 @@ html {
   //background-color: rgb(16, 83, 83);
   height: 89vh;
   margin-top: 20px;
+}
+.Button2 {
+  background-color: #00ffb9;
+  position: absolute;
+  top: 80px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  display: inline-block;
+  cursor: pointer;
+  color: #000;
+  font-family: Arial;
+  font-size: 16px;
+  padding: 10px 15px;
+  text-decoration: none;
+  font-weight: bold;
+  height: 80px;
+  margin: 5px;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+}
+.Button2:hover {
+  background-color: #009c73;
 }
 .centralComponent {
   width: 70%;
