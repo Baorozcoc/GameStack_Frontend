@@ -29,7 +29,7 @@ export default {
         variables: {
           inputUser: {
             username: username,
-            password: password,
+            password: parseInt(password,10),
             email: email,
             role: "User",
             gamePreferences: [],
@@ -55,7 +55,7 @@ export default {
               }`,
         variables: {
           email: email,
-          password: password,
+          password: parseInt(password,10),
         },
       },
       {

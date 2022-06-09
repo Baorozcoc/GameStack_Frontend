@@ -270,9 +270,10 @@ export default {
     //Aquí hay que hacer una función que traiga todos los videojuegos y los almacene en 
     //this.videojuegos, además que coja entre 4 y 8 juegos aleatorios entre this.videojuegos 
     //(o puede ser los 4-8 primeros) y los almacene en this.videojuegosSlider
-
     //La función que los organiza por selector queda como deuda tecnica por ahora
+    //loadGames: 
   },
+  
 };
 </script>
 <style lang="scss">
