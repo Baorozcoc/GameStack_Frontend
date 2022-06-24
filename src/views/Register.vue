@@ -78,8 +78,9 @@ export default {
         };
         console.log("Creado");
         auth.setUserLogged(user);
+        //Aqui se debe guardar el nombre de usuario en this.$MyUserName
+        //y el id del usuario en this.$MyUserID
         this.$router.push("/");
-        //Aqui se debe guardar el usuario en LocalStorage para cargarlo en la barra de navegación
         this.error=false;
       } catch (error) {
         console.log("No creado");

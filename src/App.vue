@@ -17,7 +17,7 @@ import { RouterLink, RouterView } from "vue-router";
           @keyup.enter="Buscar()"
         />
         <img src="./assets/search.svg" class="searchButton" @click="Buscar()"/>
-        <div v-if="id == ''">
+        <div v-if="MyUserID == ''">
           <RouterLink to="/login"
             ><a class="Button">Inicia Sesión</a></RouterLink
           >
@@ -27,7 +27,8 @@ import { RouterLink, RouterView } from "vue-router";
         </div>
         <div v-else class="username" @click="RedirectUser()">
           <div class="greenB"></div>
-          {{ username }}
+          {{ $MyUserName }}
+          <img src="./assets/menu.png" class="menuButton" @click="Menu()"/>
         </div>
       </div>
     </header>
@@ -39,13 +40,6 @@ import { RouterLink, RouterView } from "vue-router";
 <script>
 export default {
   data: () => ({
-    id: "",
-    email: "",
-    username: "KudKun",
-    password: "",
-    role: "",
-    gamePreferences: ["Action", "Adventure"],
-    v: 0,
     Busqueda: "",
   }),
   methods: {
@@ -54,20 +48,24 @@ export default {
       this.Busqueda = "";
     },
     RedirectUser: function () {
-      this.$router
+      //Aqui se hace una petición para traer al usuario en base a this.id
+      //Lo que devuelve esta petición se envía como parametros en la siguiente
+      //Función:
+      /*this.$router
         .push({
           name: "user",
           params: {
             id: this.id,
             username: this.username,
-            v: this.v,
-            gamePreferences: this.gamePreferences,
+            v: ...............,
+            gamePreferences: .................,
           },
         })
-        .catch((err) => {});
+        .catch((err) => {});*/
     },
-    //Aqui debe haber una función que cargue el usuario desde LocalStorage y lo ponga en
-    //las variables designadas para ello en data y se llama cada vez que se cambia de vista
+    Menu: function(){
+      this.$MyUserName= "baorozcoc";
+    }
   },
 };
 </script>
@@ -117,6 +115,13 @@ html {
   background-color: #00ffb9;
   border-radius: 10px;
   width: 35px;
+  cursor: pointer;
+}
+.menuButton {
+  background-color: #00ffb9;
+  border-radius: 10px;
+  width: 35px;
+  margin-left: 8px;
   cursor: pointer;
 }
 .logo {

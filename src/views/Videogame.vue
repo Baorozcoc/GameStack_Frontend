@@ -59,11 +59,11 @@
           }}</b
           > {{ reseña.createdat }} <br />
           {{ reseña.content }}
-          <div class="iconos">
+          <!--div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 
             <img src="@/assets/disagree.png" alt="Videojuego" /> 
             <img src="@/assets/comment.png" alt="Videojuego" /> 
-          </div>
+          </div-->
         </div>
       </div>
     </div>
