@@ -60,9 +60,9 @@
           > {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">
-            <img src="@/assets/agree.png" alt="Videojuego" /> 0
-            <img src="@/assets/disagree.png" alt="Videojuego" /> 0
-            <img src="@/assets/comment.png" alt="Videojuego" /> 0
+            <img src="@/assets/agree.png" alt="Videojuego" /> 
+            <img src="@/assets/disagree.png" alt="Videojuego" /> 
+            <img src="@/assets/comment.png" alt="Videojuego" /> 
           </div>
         </div>
       </div>
@@ -170,14 +170,14 @@ html {
 
 .bannerP {
   width: 100%;
-  height: 30vh;
+  height: 40vh;
 }
 .Info {
   background-color: rgba(68, 68, 68, 0.6);
   backdrop-filter: blur(5px);
   width: 60%;
   height: 30vh;
-  top: 20%;
+  top: 25%;
   position: absolute;
   display: flex;
   justify-content: space-around;
@@ -216,7 +216,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 35px;
+  font-size: 25px;
   font-weight: 700;
   font-family: Arial;
   color: black;
@@ -248,6 +248,7 @@ html {
   padding: 10px;
   margin: 5px;
   padding-left: 20px;
+  cursor: pointer;
 }
 .user {
   color: #00ffb9;
@@ -258,6 +259,9 @@ html {
   justify-content: flex-end;
   margin: 0 5%;
   margin-top: 10px;
+}
+.reseña:hover{
+  background-color: #34725f;
 }
 .iconos img {
   width: 24px;

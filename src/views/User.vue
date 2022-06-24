@@ -24,9 +24,9 @@
           {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <div class="iconos">
-            <img src="@/assets/agree.png" alt="Videojuego" /> 0
-            <img src="@/assets/disagree.png" alt="Videojuego" /> 0
-            <img src="@/assets/comment.png" alt="Videojuego" /> 0
+            <img src="@/assets/agree.png" alt="Videojuego" /> 
+            <img src="@/assets/disagree.png" alt="Videojuego" /> 
+            <img src="@/assets/comment.png" alt="Videojuego" /> 
           </div>
         </div>
       </div>
@@ -70,26 +70,26 @@ export default {
     ],
     fondos:["@/assets/GIFWPP1.gif","@/assets/GIFWPP2.gif","@/assets/GIFWPP3.gif","@/assets/GIFWPP4.gif","@/assets/GIFWPP5.gif"], //Para uso futuro, cambiar dinamicamente el fondo
   }),
-  //Aquí debe haber un metodo que traiga las reseñas por ID del usuario con 
-  //parametro "$route.params.id"
   methods:{
+    //Aquí debe haber un metodo que traiga las reseñas por ID del usuario con 
+    //parametro "$route.params.id"
     RedirectVG: function(idVG){
       //Aqui se toma el ID del videojuego, con este se busca el videojuego y se trae
       //Luego se manda cada uno de sus atributos como parametro por la función
-      //comentada a continuación, cambiando el "this.video..." por el videojuego que traemos
+      //comentada a continuación
       /*
         this.$router
         .push({
           name: "videogame",
           params: {
-            id: this.videojuegosSlider[this.index].id,
-            title: this.videojuegosSlider[this.index].title,
-            description: this.videojuegosSlider[this.index].description,
-            idcategory: this.videojuegosSlider[this.index].idcategory,
-            cover: this.videojuegosSlider[this.index].cover,
-            screenshots: this.videojuegosSlider[this.index].screenshots,
-            pubdate: this.videojuegosSlider[this.index].pubdate,
-            score: this.videojuegosSlider[this.index].score,
+            id: ..........,
+            title: .........,
+            description: ..................,
+            idcategory: ..................,
+            cover: ........................,
+            screenshots: ..........................,
+            pubdate: .......................,
+            score: .....................,
           },
         })
         .catch((err) => {});

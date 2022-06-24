@@ -14,8 +14,9 @@ import { RouterLink, RouterView } from "vue-router";
           placeholder="Busca un juego"
           class="search"
           v-model="Busqueda"
+          @keyup.enter="Buscar()"
         />
-        <img src="./assets/search.svg" class="searchButton" @click="Buscar()" />
+        <img src="./assets/search.svg" class="searchButton" @click="Buscar()"/>
         <div v-if="id == ''">
           <RouterLink to="/login"
             ><a class="Button">Inicia Sesión</a></RouterLink

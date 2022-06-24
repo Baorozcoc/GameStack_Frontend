@@ -68,9 +68,9 @@
       </div>
       <div v-if="userLogged">Bienvenido:{{ userLogged }}</div>
     </div>
-    <RouterLink to="/request"
+    <!--RouterLink to="/request"
       ><button class="Button2">Vista Especial</button></RouterLink
-    >
+    -->
   </div>
 </template>
 
