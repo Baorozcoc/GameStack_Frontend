@@ -7,8 +7,9 @@ import { RouterLink, RouterView } from "vue-router";
     <header class="head">
       <div class="wrapper">
         <RouterLink to="/"
-          ><img src="./assets/GameStackMini.png" class="logo"
-        /></RouterLink>
+          ><img src="./assets/GameStackMini.png" class="logo"/>
+          <img src="./assets/GSMini.png" class="logo2"/>
+        </RouterLink>
         <input
           type="text"
           placeholder="Busca un juego"
@@ -17,7 +18,7 @@ import { RouterLink, RouterView } from "vue-router";
           @keyup.enter="Buscar()"
         />
         <img src="./assets/search.svg" class="searchButton" @click="Buscar()"/>
-        <div v-if="MyUserID == ''">
+        <div v-if="$MyUserID == ''">
           <RouterLink to="/login"
             ><a class="Button">Inicia Sesión</a></RouterLink
           >
@@ -101,7 +102,7 @@ html {
   padding: 6px;
   font-size: 16px;
   height: 65%;
-  width: 22%;
+  width: 40vw;
   border-width: 0px;
   border-color: #cccccc;
   background-color: #3a3a3a;
@@ -111,7 +112,7 @@ html {
 }
 .searchButton {
   position: absolute;
-  left: 59%;
+  left: 63%;
   background-color: #00ffb9;
   border-radius: 10px;
   width: 35px;
@@ -130,6 +131,15 @@ html {
   height: 8vh1;
 }
 .logo:hover {
+  transform: scale(0.9);
+}
+.logo2 {
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  height: 8vh1;
+  display:none;
+}
+.logo2:hover {
   transform: scale(0.9);
 }
 .Button {
@@ -157,8 +167,8 @@ html {
   top: 1px;
 }
 .greenB {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   background-color: #00ffb9;
   border: 1px solid black;
   margin-right: 20px;
@@ -166,22 +176,54 @@ html {
   display: inline-block;
 }
 .username {
-  font-size: 28px;
+  font-size: 24px;
   font-family: Arial;
   font-weight: 600;
   display: flex;
   text-decoration: none;
   color: #000;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  max-width: 350px;
   cursor:pointer;
+}
+@media screen and (max-width: 1200px) {
+  .searchButton{
+    left:60%;
+    //width:300px;
+  }
 }
 @media screen and (max-width: 800px) {
   .username {
     font-size: 24px;
+    min-width: 180px;
+    margin-left: 10px;
+  }
+  .searchButton{
+    left:50%;
+  }
+  .search{
+    width:300px;
   }
   .greenB {
-    width: 24px;
-    height: 24px;
+    display:none;
+  }
+  .logo{
+    display:none;
+  }
+  .logo2{
+    display:block;
   }
 }
-//Falta: Responsive Design, Cerrar sesión y otras opciones
+@media screen and (max-width: 660px) {
+  .Button{
+    font-size: 14px;
+    margin:2px;
+    padding: 4px 15px;
+  }
+  .username{
+    font-size: 20px;
+  }
+}
 </style>
