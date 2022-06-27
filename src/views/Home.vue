@@ -66,7 +66,7 @@
           ><img :src="GetImage(index)" alt="Juego" class="listP" />
         </RouterLink>
       </div>
-      <div v-if="userLogged">Bienvenido:{{ userLogged }}</div>
+      <div class="Button" @click="getAllGames()" > "GetAG" </div>
     </div>
     <!--RouterLink to="/request"
       ><button class="Button2">Vista Especial</button></RouterLink
@@ -283,35 +283,45 @@ export default {
     //La función que los organiza por selector queda como deuda tecnica por ahora
     //loadGames:
     getAllGames: function () {
-      var games = axios.get(
-        ENDPOINT_PATH,
-        {
-          query: `query GetUserByUsername {
-            getAllVideogames {
-              Id
-              score
-              pubdate
-              screenshots
-              cover
-              idcategory
-              description
-              title
-            }
-          }`, //Parametros del objeto encontrado a devolver
-          variables: {},
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
+
+      var data = JSON.stringify({
+        query: `query GetAllVideogames {
+                  getAllVideogames {
+                    Id
+                    title
+                    description
+                    idcategory
+                    cover
+                    screenshots
+                    pubdate
+                    score
+                  }
+                }`,
+                variables: {}
+              });
+
+        var config = {
+            method: 'post',
+            url: 'https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/',
+            headers: { 
+              'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU', 
+              'Content-Type': 'application/json'
           },
-        }
-      );
-      this.videojuegos = games;
+          data : data
+        };
+
+        axios(config)
+          .then(function (response) {
+            this.videojuegos = response.data;
+            console.log(JSON.stringify(response.data));
+        })
+          .catch(function (error) {
+            console.log(error);
+        });
     },
-  } /*
-  mounted() {
-    this.getAllGames();*/,
+  },
+  //mounted() {
+  //  this.getAllGames();
   //},
 };
 </script>
