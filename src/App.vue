@@ -42,7 +42,7 @@ import { RouterLink, RouterView } from "vue-router";
       </div>
       <div id="menu">
         <div class="option">Configuración</div>
-        <div class="option">Cerrar Sesión</div>
+        <div class="option" @click="SignOut()">Cerrar Sesión</div>
       </div>
     </header>
     <div class="Content">
@@ -61,7 +61,7 @@ export default {
       this.Busqueda = "";
     },
     RedirectUser: function () {
-      //Aqui se hace una petición para traer al usuario en base a this.id
+      //Aqui se hace una petición para traer al usuario en base a this.$MyUserID
       //Lo que devuelve esta petición se envía como parametros en la siguiente
       //Función:
       /*this.$router
@@ -83,6 +83,11 @@ export default {
         document.getElementById("menu").style.visibility = "hidden";
       }
     },
+    SignOut: function(){
+      this.$MyUserID= '';
+      this.$MyUserName= '';
+      document.getElementById("menu").style.visibility = "hidden";
+    }
   },
 };
 </script>
@@ -207,7 +212,7 @@ html {
 .username {
   font-size: 24px;
   font-family: Arial;
-  font-weight: 600;
+  font-weight:500;
   display: flex;
   text-decoration: none;
   color: #000;
@@ -218,19 +223,23 @@ html {
   cursor: pointer;
 }
 #menu {
-  width: 200px;
+  width: 30vw;
+  min-width: 250px;
   background-color: white;
   height: 120px;
   position: absolute;
   right: 0px;
   visibility: hidden;
+  border-left: 10px solid #3a3a3a;
+  border-bottom: 10px solid #3a3a3a;
+  padding-top: 10px;
 }
 .option {
-  font-size: 20px;
+  font-size: 22px;
   font-family: Arial;
   font-weight: 500;
   text-align: center;
-  margin: 3px 0px;
+  padding: 6px 0px;
 }
 .option:hover {
   background-color: #00ffb9;
@@ -271,6 +280,9 @@ html {
   .buttons {
     display: flex;
     flex-direction: column;
+  }
+  .option{
+    font-size: 18px;
   }
 }
 </style>

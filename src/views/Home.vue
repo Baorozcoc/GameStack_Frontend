@@ -415,16 +415,16 @@ html {
 }
 .listP {
   border: 4px solid #ffffff;
-  width: 15%;
-  height: 15vw;
+  width: 30%;
+  //height: 15vw;
   margin: 0.5vw;
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
 }
 @media screen and (max-width: 800px) {
   .listP {
-    width: 40%;
-    height: 45vw;
+    width: 45%;
+    //height: 45vw;
   }
   .filter {
     font-size: 14px;

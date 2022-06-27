@@ -175,7 +175,7 @@ html {
 .Info {
   background-color: rgba(68, 68, 68, 0.6);
   backdrop-filter: blur(5px);
-  width: 60%;
+  width: 69%;
   height: 30vh;
   top: 25%;
   position: absolute;
@@ -198,7 +198,7 @@ html {
   margin: 10px;
 }
 .Portada {
-  height: 90%;
+  height: 18vw;
   margin: 10px;
 }
 .titulo {
@@ -288,7 +288,7 @@ html {
     height: 30vw;
   }
   .Info {
-    width: 85vw;
+    width: 92%;
     font-size: 1.4vw;
     height: 32vh;
   }
@@ -303,17 +303,20 @@ html {
 }
 @media screen and (max-width: 800px) {
   .Info {
-    font-size: 1.3vh;
+    font-size: 16px;
     height: 35vh;
   }
   .titulo {
-    font-size: 2vh;
+    font-size: 28px;
   }
   .reseñas {
     //background-color: blue;
     font-size: 12px;
     font-weight: 500;
     margin-top: 18vh;
+  }
+  .Portada{
+    display: none;
   }
 }
 </style>
