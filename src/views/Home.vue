@@ -275,15 +275,14 @@ export default {
     },
     GetBanner: function (value) {
       //Muestra imgs de banner
-      return this.videojuegos[value].cover;
+      return this.videojuegosSlider[value].cover;
     },
     //Aquí hay que hacer una función que traiga todos los videojuegos y los almacene en
     //this.videojuegos, además que coja entre 4 y 8 juegos aleatorios entre this.videojuegos
     //(o puede ser los 4-8 primeros) y los almacene en this.videojuegosSlider
     //La función que los organiza por selector queda como deuda tecnica por ahora
     //loadGames:
-    getAllGames: function () {
-
+    async getAllGames() {
       var data = JSON.stringify({
         query: `query GetAllVideogames {
                   getAllVideogames {
@@ -308,20 +307,33 @@ export default {
               'Content-Type': 'application/json'
           },
           data : data
-        };
+        }; 
+        const r = await axios(config)
+        console.log(r,"respuesta");
+        this.videojuegos = r.data.data.getAllVideogames
 
+        //////////////////
         axios(config)
           .then(function (response) {
-            this.videojuegos = response.data;
-            console.log(JSON.stringify(response.data));
+            //data.videojuegos = (response.data.data.getAllVideogames);
+            //this.videojuegos = {response.data.data.getAllVideogames} 
+            //var vm = this.videojuegos; 
+            //for (var i = 0; i < l.length; i++){
+            //  vm.push(l[i])
+            //}
+            //console.log(this.videojuegos);
+            console.log(/*JSON.parse*/(response.data.data.getAllVideogames));
         })
-          .catch(function (error) {
+          .catch(function (error) {  
             console.log(error);
         });
-    },
+        ///////////////
+
+
+    }, 
   },
   //mounted() {
-  //  this.getAllGames();
+  // this.getAllGames();
   //},
 };
 </script>
