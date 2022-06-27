@@ -66,7 +66,7 @@
           ><img :src="GetImage(index)" alt="Juego" class="listP" />
         </RouterLink>
       </div>
-      <div class="Button" @click="getAllGames()" > "GetAG" </div>
+      <div class="Button" @click="getAllGames()">"GetAG"</div>
     </div>
     <!--RouterLink to="/request"
       ><button class="Button2">Vista Especial</button></RouterLink
@@ -296,41 +296,39 @@ export default {
                     score
                   }
                 }`,
-                variables: {}
-              });
+        variables: {},
+      });
+      var config = {
+        method: "post",
+        url: "https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU",
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      const r = await axios(config);
+      console.log(r, "respuesta");
+      this.videojuegos = r.data.data.getAllVideogames;
 
-        var config = {
-            method: 'post',
-            url: 'https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/',
-            headers: { 
-              'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU', 
-              'Content-Type': 'application/json'
-          },
-          data : data
-        }; 
-        const r = await axios(config)
-        console.log(r,"respuesta");
-        this.videojuegos = r.data.data.getAllVideogames
-
-        //////////////////
-        axios(config)
-          .then(function (response) {
-            //data.videojuegos = (response.data.data.getAllVideogames);
-            //this.videojuegos = {response.data.data.getAllVideogames} 
-            //var vm = this.videojuegos; 
-            //for (var i = 0; i < l.length; i++){
-            //  vm.push(l[i])
-            //}
-            //console.log(this.videojuegos);
-            console.log(/*JSON.parse*/(response.data.data.getAllVideogames));
+      //////////////////
+      axios(config)
+        .then(function (response) {
+          //data.videojuegos = (response.data.data.getAllVideogames);
+          //this.videojuegos = {response.data.data.getAllVideogames}
+          //var vm = this.videojuegos;
+          //for (var i = 0; i < l.length; i++){
+          //  vm.push(l[i])
+          //}
+          //console.log(this.videojuegos);
+          console.log(/*JSON.parse*/ response.data.data.getAllVideogames);
         })
-          .catch(function (error) {  
-            console.log(error);
+        .catch(function (error) {
+          console.log(error);
         });
-        ///////////////
-
-
-    }, 
+      ///////////////
+    },
   },
   //mounted() {
   // this.getAllGames();

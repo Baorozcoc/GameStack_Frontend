@@ -7,18 +7,26 @@ import { RouterLink, RouterView } from "vue-router";
     <header class="head">
       <div class="wrapper">
         <RouterLink to="/"
-          ><img src="./assets/GameStackMini.png" class="logo"/>
-          <img src="./assets/GSMini.png" class="logo2"/>
+          ><img src="./assets/GameStackMini.png" class="logo" />
+          <img src="./assets/GSMini.png" class="logo2" />
         </RouterLink>
-        <input
-          type="text"
-          placeholder="Busca un juego"
-          class="search"
-          v-model="Busqueda"
-          @keyup.enter="Buscar()"
-        />
-        <img src="./assets/search.svg" class="searchButton" @click="Buscar()"/>
-        <div v-if="$MyUserID == ''">
+        <div class="searchdiv">
+          <input
+            type="text"
+            placeholder="Busca un juego"
+            class="search"
+            v-model="Busqueda"
+            @keyup.enter="Buscar()"
+          />
+          <div class="searchButtonExt">
+            <img
+              src="./assets/search.svg"
+              class="searchButton"
+              @click="Buscar()"
+            />
+          </div>
+        </div>
+        <div v-if="$MyUserID == ''" class="buttons">
           <RouterLink to="/login"
             ><a class="Button">Inicia Sesión</a></RouterLink
           >
@@ -29,8 +37,12 @@ import { RouterLink, RouterView } from "vue-router";
         <div v-else class="username" @click="RedirectUser()">
           <div class="greenB"></div>
           {{ $MyUserName }}
-          <img src="./assets/menu.png" class="menuButton" @click="Menu()"/>
+          <img src="./assets/menu.png" class="menuButton" @click="Menu()" />
         </div>
+      </div>
+      <div id="menu">
+        <div class="option">Configuración</div>
+        <div class="option">Cerrar Sesión</div>
       </div>
     </header>
     <div class="Content">
@@ -64,9 +76,13 @@ export default {
         })
         .catch((err) => {});*/
     },
-    Menu: function(){
-      this.$MyUserName= "baorozcoc";
-    }
+    Menu: function () {
+      if (document.getElementById("menu").style.visibility == "hidden") {
+        document.getElementById("menu").style.visibility = "visible";
+      } else {
+        document.getElementById("menu").style.visibility = "hidden";
+      }
+    },
   },
 };
 </script>
@@ -98,25 +114,38 @@ html {
   width: 100%;
   height: 89vh;
 }
+.searchdiv {
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .search {
   padding: 6px;
   font-size: 16px;
-  height: 65%;
-  width: 40vw;
+  height: 5vh;
+  width: 85%;
   border-width: 0px;
-  border-color: #cccccc;
   background-color: #3a3a3a;
   color: #fefefe;
-  border-style: solid;
-  border-radius: 14px;
+  border-radius: 14px 0px 0px 14px;
+  display: inline;
 }
 .searchButton {
-  position: absolute;
-  left: 63%;
   background-color: #00ffb9;
   border-radius: 10px;
   width: 35px;
   cursor: pointer;
+}
+.searchButtonExt {
+  height: 5vh;
+  background-color: #3a3a3a;
+  border-radius: 0px 14px 14px 0px;
+  padding: 6px;
+  width: 15%;
+  display: inline-flex;
+  justify-content: end;
+  align-items: center;
 }
 .menuButton {
   background-color: #00ffb9;
@@ -137,7 +166,7 @@ html {
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   height: 8vh1;
-  display:none;
+  display: none;
 }
 .logo2:hover {
   transform: scale(0.9);
@@ -186,13 +215,26 @@ html {
   align-items: center;
   min-width: 300px;
   max-width: 350px;
-  cursor:pointer;
+  cursor: pointer;
 }
-@media screen and (max-width: 1200px) {
-  .searchButton{
-    left:60%;
-    //width:300px;
-  }
+#menu {
+  width: 200px;
+  background-color: white;
+  height: 120px;
+  position: absolute;
+  right: 0px;
+  visibility: hidden;
+}
+.option {
+  font-size: 20px;
+  font-family: Arial;
+  font-weight: 500;
+  text-align: center;
+  margin: 3px 0px;
+}
+.option:hover {
+  background-color: #00ffb9;
+  cursor: pointer;
 }
 @media screen and (max-width: 800px) {
   .username {
@@ -200,30 +242,35 @@ html {
     min-width: 180px;
     margin-left: 10px;
   }
-  .searchButton{
-    left:50%;
-  }
-  .search{
-    width:300px;
+  .search {
+    width: 300px;
   }
   .greenB {
-    display:none;
+    display: none;
   }
-  .logo{
-    display:none;
+  .logo {
+    display: none;
   }
-  .logo2{
-    display:block;
+  .logo2 {
+    display: block;
   }
 }
 @media screen and (max-width: 660px) {
-  .Button{
+  .Button {
     font-size: 14px;
-    margin:2px;
+    margin: 2px;
     padding: 4px 15px;
   }
-  .username{
-    font-size: 20px;
+  .username {
+    max-width: 120px;
+    min-width: 20px;
+    font-size: 16px;
+    text-align: end;
+    text-overflow: ellipsis;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>
