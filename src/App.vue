@@ -68,8 +68,8 @@ export default {
         .push({
           name: "user",
           params: {
-            id: this.id,
-            username: this.username,
+            id: this.$MyUserID,
+            username: this.$MyUserName,
             v: ...............,
             gamePreferences: .................,
           },
@@ -113,6 +113,7 @@ html {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  overflow: hidden;
   width: 100%;
 }
 .Content {

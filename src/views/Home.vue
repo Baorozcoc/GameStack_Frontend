@@ -61,7 +61,6 @@
           ><img :src="GetImage(index)" alt="Juego" class="listP" />
         </RouterLink>
       </div>
-      <div class="Button" @click="getAllGames()">"GetAG"</div>
     </div>
     <!--RouterLink to="/request"
       ><button class="Button2">Vista Especial</button></RouterLink
