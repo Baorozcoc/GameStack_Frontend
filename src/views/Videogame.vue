@@ -79,7 +79,7 @@
 export default {
   name: "Videogame",
   data: () => ({
-    categorias: ["Accion", "Shooter", "Guerra"],
+    categorias: ["Accion", "Shooter", "Guerra", "Estrategia", "RPG", "Sci-Fi"],
     crearReseña: false,
     reseñaUsuario: "",
     username: "KudKun",

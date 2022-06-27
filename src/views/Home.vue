@@ -2,18 +2,13 @@
   <div class="Home">
     <div class="centralComponent">
       <div class="Carrousel">
-        <ul class="slider">
+        <ul class="slider" @click="RedirectVG()">
           <li
             v-for="(juego, index) in videojuegosSlider"
             :key="index"
-            :id="juego.id"
+            :id="juego.title"
           >
-            <img
-              :src="GetBanner(index)"
-              alt="Juego"
-              class="bannerP"
-              @click="RedirectVG()"
-            />
+            <img :src="GetBanner(index)" alt="Juego" class="bannerP" />
             {{ data }}
           </li>
         </ul>
@@ -23,7 +18,7 @@
               <a
                 v-for="(juego, index) in videojuegosSlider"
                 :key="index"
-                :href="'#' + juego.id"
+                :href="'#' + juego.title"
                 @click="ChangeDescr(juego.title, juego.description, index)"
                 ><div class="miniB"></div
               ></a>
@@ -83,7 +78,7 @@ const token =
 export default {
   name: "Home",
   data: () => ({
-    videojuegosSlider: [
+    videojuegosSlider: [/*
       {
         id: "juego1",
         title: "Metal Gear Solid",
@@ -143,9 +138,9 @@ export default {
         ],
         pubdate: "08-10-2021",
         score: "4.8",
-      },
+      },*/
     ],
-    videojuegos: [
+    videojuegos: [/*
       {
         id: "juego1",
         title: "Metal Gear Solid",
@@ -233,7 +228,7 @@ export default {
         ],
         pubdate: "06-08-2022",
         score: "3.2",
-      },
+      },*/
     ],
     title: "",
     description: "",
@@ -277,11 +272,6 @@ export default {
       //Muestra imgs de banner
       return this.videojuegosSlider[value].cover;
     },
-    //Aquí hay que hacer una función que traiga todos los videojuegos y los almacene en
-    //this.videojuegos, además que coja entre 4 y 8 juegos aleatorios entre this.videojuegos
-    //(o puede ser los 4-8 primeros) y los almacene en this.videojuegosSlider
-    //La función que los organiza por selector queda como deuda tecnica por ahora
-    //loadGames:
     async getAllGames() {
       var data = JSON.stringify({
         query: `query GetAllVideogames {
@@ -311,28 +301,19 @@ export default {
       const r = await axios(config);
       console.log(r, "respuesta");
       this.videojuegos = r.data.data.getAllVideogames;
-
-      //////////////////
+      this.videojuegosSlider = r.data.data.getAllVideogames;
       axios(config)
         .then(function (response) {
-          //data.videojuegos = (response.data.data.getAllVideogames);
-          //this.videojuegos = {response.data.data.getAllVideogames}
-          //var vm = this.videojuegos;
-          //for (var i = 0; i < l.length; i++){
-          //  vm.push(l[i])
-          //}
-          //console.log(this.videojuegos);
-          console.log(/*JSON.parse*/ response.data.data.getAllVideogames);
+          console.log( response.data.data.getAllVideogames);
         })
         .catch(function (error) {
           console.log(error);
         });
-      ///////////////
     },
   },
-  //mounted() {
-  // this.getAllGames();
-  //},
+  mounted() {
+    this.getAllGames();
+  },
 };
 </script>
 <style lang="scss">
@@ -341,7 +322,6 @@ html {
 }
 .Home {
   width: 100%;
-  //background-color: rgb(16, 83, 83);
   height: 89vh;
   margin-top: 20px;
 }
@@ -371,7 +351,6 @@ html {
   width: 70%;
   background-color: white;
   margin: 0 15%;
-  //height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -381,7 +360,6 @@ html {
 .Carrousel {
   width: 65vw;
   height: 23vw;
-  //background-color: blueviolet;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -484,7 +462,6 @@ ul.slider li {
   width: 65vw;
   height: 20vw;
   left: -33vw;
-  //border: 2px solid red;
   background: #fff;
   overflow: hidden;
 }
