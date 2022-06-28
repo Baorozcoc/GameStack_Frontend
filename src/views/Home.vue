@@ -48,7 +48,7 @@
           :to="{
             name: 'videogame',
             params: {
-              id: juego.id,
+              Id: juego.Id,
               title: juego.title,
               description: juego.description,
               idcategory: juego.idcategory,
@@ -103,7 +103,7 @@ export default {
         .push({
           name: "videogame",
           params: {
-            id: this.videojuegosSlider[this.index].id,
+            Id: this.videojuegosSlider[this.index].Id,
             title: this.videojuegosSlider[this.index].title,
             description: this.videojuegosSlider[this.index].description,
             idcategory: this.videojuegosSlider[this.index].idcategory,

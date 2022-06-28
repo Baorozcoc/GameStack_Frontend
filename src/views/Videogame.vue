@@ -82,8 +82,8 @@
   </div>
 </template>
 <script>
-import axios from "axios";  
-import {useRoute} from "vue-router";
+import axios from "axios";
+import { useRoute } from "vue-router";
 
 /*{
             cover: this.videojuegosSlider[index].cover,
@@ -105,7 +105,7 @@ export default {
     crearReseña: false,
     reseñaUsuario: "",
     username: "KudKun",
-    reseñas: [
+    reseñas: [/*
       {
         reviewid: 1,
         content: "Buen juego",
@@ -134,7 +134,7 @@ export default {
         user: "Playernator16",
         videogame: "farcry1",
         createdat: "2022-06-04",
-      },
+      },*/
     ],
   }),
   methods: {
@@ -164,7 +164,7 @@ export default {
         })
         .catch((err) => {});
     },
-    async getReviewsByGame(id){
+    async getReviewsByGame() {
       var data = JSON.stringify({
         query: `query GetReviewByGame($videogame: String!) {
         getReviewByGame(videogame: $videogame) {
@@ -175,37 +175,35 @@ export default {
           createdat 
         }
       }`,
-        variables: {"videogame":id}
+        variables: { videogame: this.$route.params.Id },
       });
 
       var config = {
-        method: 'post',
-        url: 'https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/ ',
-        headers: { 
-          'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU', 
-          'Content-Type': 'application/json'
+        method: "post",
+        url: "https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/ ",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU",
+          "Content-Type": "application/json",
         },
-        data : data
+        data: data,
       };
       const reviews = await axios(config);
-      console.log(id, "respuesta");
-      this.reseñas  = reviews.data.data.getReviewByGame;
+      console.log(reviews, "respuesta");
+      this.reseñas = reviews.data.data.getReviewByGame;
 
       axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-          }
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
-  mounted(){
-   const route = useRoute();
-   const id = route.params.id;
-   this.getReviewsByGame(id);
-  }
+  mounted() {
+    this.getReviewsByGame();
+  },
 };
 </script>
 <style scoped lang="scss">
