@@ -267,7 +267,7 @@ html {
 .listP {
   border: 4px solid #ffffff;
   width: 30%;
-  //height: 15vw;
+  height: 10vw;
   margin: 0.5vw;
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
@@ -275,7 +275,7 @@ html {
 @media screen and (max-width: 800px) {
   .listP {
     width: 45%;
-    //height: 45vw;
+    height: 20vw;
   }
   .filter {
     font-size: 14px;
