@@ -70,6 +70,9 @@
   </div>
 </template>
 <script>
+import axios from "axios";  
+import {useRoute} from "vue-router";
+
 /*{
             cover: this.videojuegosSlider[index].cover,
             screenshots: this.videojuegosSlider[index].screenshots,
@@ -142,7 +145,48 @@ export default {
         })
         .catch((err) => {});
     },
+    async getReviewsByGame(id){
+      var data = JSON.stringify({
+        query: `query GetReviewByGame($videogame: String!) {
+        getReviewByGame(videogame: $videogame) {
+          reviewid
+          content
+          user
+          videogame
+          createdat 
+        }
+      }`,
+        variables: {"videogame":id}
+      });
+
+      var config = {
+        method: 'post',
+        url: 'https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/ ',
+        headers: { 
+          'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      const reviews = await axios(config);
+      console.log(id, "respuesta");
+      this.reseñas  = reviews.data.data.getReviewByGame;
+
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+          }
   },
+  mounted(){
+   const route = useRoute();
+   const id = route.params.id;
+   this.getReviewsByGame(id);
+  }
 };
 </script>
 <style scoped lang="scss">

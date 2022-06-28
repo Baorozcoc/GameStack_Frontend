@@ -60,9 +60,40 @@ export default {
       this.$router.push({ name: "search", params: { termino: this.Busqueda } });
       this.Busqueda = "";
     },
-    RedirectUser: function () {
-      //Aqui se hace una petición para traer al usuario en base a this.$MyUserID
-      //Lo que devuelve esta petición se envía como parametros en la siguiente
+    async RedirectUser () {
+      var data = JSON.stringify({
+        query: `query GetUserByID($idUser: String!) {
+        getUserByID(IdUser: $idUser) {
+          username
+          role
+          token
+        }
+      }`,
+        variables: {"idUser":"62ba6fe10504d888fadb516c"}
+      });
+
+      var config = {
+        method: 'post',
+        url: 'https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/ ',
+        headers: { 
+          'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      const r = await axios(config);
+      //console.log(r, "respuesta");
+      this.$ = r.data.data.getAllVideogames;
+      this.videojuegosSlider = r.data.data.getAllVideogames;
+
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
       //Función:
       /*this.$router
         .push({
