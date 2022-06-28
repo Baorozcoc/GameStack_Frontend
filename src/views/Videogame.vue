@@ -12,7 +12,19 @@
           <!--div class="titulo">{{ titulo }}</div-->
           <div class="titulo">{{ $route.params.title }}</div>
           <b>{{ $route.params.pubdate }}</b>
-          <div>{{ $route.params.description }}</div>
+          <div v-if="$route.params.description.length < 550">
+            {{ $route.params.description }}
+          </div>
+          <div v-else>
+            {{
+              $route.params.description
+                .slice(0, 550)
+                .substring(
+                  0,
+                  $route.params.description.slice(0, 550).lastIndexOf(".") + 1
+                )
+            }}
+          </div>
         </div>
         <div>
           <div class="Puntuacion">{{ $route.params.score }}</div>
@@ -56,8 +68,8 @@
         <div v-for="reseña in reseñas" :key="reseña.id" class="reseña">
           <b class="user" @click="RedirectUser(reseña.user)">{{
             reseña.user
-          }}</b
-          > {{ reseña.createdat }} <br />
+          }}</b>
+          {{ reseña.createdat }} <br />
           {{ reseña.content }}
           <!--div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 
@@ -79,7 +91,14 @@
 export default {
   name: "Videogame",
   data: () => ({
-    categorias: ["Accion", "Shooter", "Guerra", "Estrategia", "RPG", "Sci-Fi"],
+    categorias: [
+      "RPG",
+      "Mazmorras",
+      "Shooter",
+      "Estrategia",
+      "Acción",
+      "Sci-Fi",
+    ],
     crearReseña: false,
     reseñaUsuario: "",
     username: "KudKun",
@@ -260,7 +279,7 @@ html {
   margin: 0 5%;
   margin-top: 10px;
 }
-.reseña:hover{
+.reseña:hover {
   background-color: #34725f;
 }
 .iconos img {
@@ -315,7 +334,7 @@ html {
     font-weight: 500;
     margin-top: 18vh;
   }
-  .Portada{
+  .Portada {
     display: none;
   }
 }
