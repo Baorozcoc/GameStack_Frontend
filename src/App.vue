@@ -51,6 +51,7 @@ import { RouterLink, RouterView } from "vue-router";
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data: () => ({
     Busqueda: "",
@@ -60,52 +61,50 @@ export default {
       this.$router.push({ name: "search", params: { termino: this.Busqueda } });
       this.Busqueda = "";
     },
-    async RedirectUser () {
+    async RedirectUser() {
       var data = JSON.stringify({
         query: `query GetUserByID($idUser: String!) {
         getUserByID(IdUser: $idUser) {
           username
           role
           token
+          gamePreferences
         }
       }`,
-        variables: {"idUser":"62ba6fe10504d888fadb516c"}
+        variables: { idUser: this.$MyUserID },
       });
 
       var config = {
-        method: 'post',
-        url: 'https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/ ',
-        headers: { 
-          'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU', 
-          'Content-Type': 'application/json'
+        method: "post",
+        url: "https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/ ",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU",
+          "Content-Type": "application/json",
         },
-        data : data
+        data: data,
       };
       const r = await axios(config);
       //console.log(r, "respuesta");
-      this.$ = r.data.data.getAllVideogames;
-      this.videojuegosSlider = r.data.data.getAllVideogames;
-
-      axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-      //Función:
-      /*this.$router
+      this.$router
         .push({
           name: "user",
           params: {
             id: this.$MyUserID,
             username: this.$MyUserName,
-            v: ...............,
-            gamePreferences: .................,
+            v: 0,
+            gamePreferences: r.data.data.getUserByID.gamePreferences,
           },
         })
-        .catch((err) => {});*/
+        .catch((err) => {});
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     Menu: function () {
       if (document.getElementById("menu").style.visibility == "hidden") {
@@ -114,11 +113,11 @@ export default {
         document.getElementById("menu").style.visibility = "hidden";
       }
     },
-    SignOut: function(){
-      this.$MyUserID= '';
-      this.$MyUserName= '';
+    SignOut: function () {
+      this.$MyUserID = "";
+      this.$MyUserName = "";
       document.getElementById("menu").style.visibility = "hidden";
-    }
+    },
   },
 };
 </script>
@@ -244,7 +243,7 @@ html {
 .username {
   font-size: 24px;
   font-family: Arial;
-  font-weight:500;
+  font-weight: 500;
   display: flex;
   text-decoration: none;
   color: #000;
@@ -313,7 +312,7 @@ html {
     display: flex;
     flex-direction: column;
   }
-  .option{
+  .option {
     font-size: 18px;
   }
 }

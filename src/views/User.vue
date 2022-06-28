@@ -34,6 +34,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "User",
   data: () => ({
@@ -73,10 +74,7 @@ export default {
   methods:{
     //Aquí debe haber un metodo que traiga las reseñas por ID del usuario con 
     //parametro "$route.params.id"
-    RedirectVG: function(idVG){
-      //Aqui se toma el ID del videojuego, con este se busca el videojuego y se trae
-      //Luego se manda cada uno de sus atributos como parametro por la función
-      //comentada a continuación
+    //RedirectVG: function(idVG){
       /*
         this.$router
         .push({
@@ -94,8 +92,46 @@ export default {
         })
         .catch((err) => {});
       */
-    }
-  }
+    async getReviewsByID() {
+      var data = JSON.stringify({
+        query: `query GetReviewByUser($user: String!) {
+        getReviewByUser(user: $user) {
+          reviewid
+          content
+          user
+          videogame
+          createdat 
+        }
+      }`,
+        variables: { user: this.$route.params.id },
+      });
+
+      var config = {
+        method: "post",
+        url: "https://gamestack-proxy-e3wbalmwuq-uc.a.run.app/ ",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU",
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      const reviews = await axios(config);
+      console.log(reviews, "respuesta");
+      this.reseñas = reviews.data.data.getReviewByUser;
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.getReviewsByID();
+  },
 };
 </script>
 <style scoped lang="scss">

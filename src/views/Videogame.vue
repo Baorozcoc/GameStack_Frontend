@@ -69,7 +69,7 @@
           <b class="user" @click="RedirectUser(reseña.user)">{{
             reseña.user
           }}</b>
-          {{ reseña.createdat }} <br />
+          {{ reseña.createdat.slice(0,10) }} <br />
           {{ reseña.content }}
           <!--div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 
@@ -105,36 +105,7 @@ export default {
     crearReseña: false,
     reseñaUsuario: "",
     username: "KudKun",
-    reseñas: [/*
-      {
-        reviewid: 1,
-        content: "Buen juego",
-        user: "Alfa",
-        videogame: "farcry1",
-        createdat: "2022-06-04",
-      },
-      {
-        reviewid: 2,
-        content: "El mejor juego que haya jugado nunca",
-        user: "RetroGamer",
-        videogame: "farcry1",
-        createdat: "2022-06-04",
-      },
-      {
-        reviewid: 3,
-        content: "Valoro mucho el sonido del juego :D ",
-        user: "xxGamerxx",
-        videogame: "farcry1",
-        createdat: "2022-06-04",
-      },
-      {
-        reviewid: 4,
-        content:
-          "Meh, podría ser mejor, me gusta la capacidad que tiene la empresa para innovar, pero no es suficiente para destacar",
-        user: "Playernator16",
-        videogame: "farcry1",
-        createdat: "2022-06-04",
-      },*/
+    reseñas: [
     ],
   }),
   methods: {
