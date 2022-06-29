@@ -113,9 +113,47 @@ export default {
       this.crearReseña = !this.crearReseña;
       this.reseñaUsuario = "";
     },
-    CrearReseña: function () {
+    async CrearReseña (){
+    
       //Aqui se manda la petición de nueva reseña con
       //this.reseñaUsuario, this.UserID(global) y this.titulo
+      /////////////////////////////////////////////////////
+      var data = JSON.stringify({
+        query: `mutation Mutation($inputReview: reviewInput) {
+        createReview(inputReview: $inputReview) {
+          content
+          createdat
+        }
+      }`,
+        variables: {"inputReview":{"content":"review prueba user hola juego Mass effect ","user":"62ba6fe10504d888fadb516c","videogame":"628040559e3552349455db07"}}
+      });
+
+      var config = {
+        method: 'post',
+        url: 'http://173.255.118.17:4040/',
+        headers: { 
+          'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+
+      //const reviews = await axios(config);
+      //console.log(reviews, "respuesta");
+      //this.reseñas = reviews.data.data.getReviewByGame;
+      const newReview = await axios(config);
+      console.log(newReview, "EEEESTAAAAAAA");
+
+
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      /////////////////////////////////////////////////////
+
       this.crearReseña = !this.crearReseña;
       this.reseñaUsuario = "";
     },
@@ -126,7 +164,7 @@ export default {
       this.$router
         .push({
           name: "user",
-          params: {
+          params: {    
             id: UserID,
             username: UserID,
             v: 0,
