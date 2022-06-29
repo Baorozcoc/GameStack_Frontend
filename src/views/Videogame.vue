@@ -69,7 +69,7 @@
           <b class="user" @click="RedirectUser(reseña.user)">{{
             reseña.user
           }}</b>
-          {{ reseña.createdat.slice(0,10) }} <br />
+          {{ reseña.createdat.slice(0, 10) }} <br />
           {{ reseña.content }}
           <!--div class="iconos">
             <img src="@/assets/agree.png" alt="Videojuego" /> 
@@ -105,16 +105,14 @@ export default {
     crearReseña: false,
     reseñaUsuario: "",
     username: "KudKun",
-    reseñas: [
-    ],
+    reseñas: [],
   }),
   methods: {
     nuevaReseña: function () {
       this.crearReseña = !this.crearReseña;
       this.reseñaUsuario = "";
     },
-    async CrearReseña (){
-    
+    async CrearReseña() {
       //Aqui se manda la petición de nueva reseña con
       //this.reseñaUsuario, this.UserID(global) y this.titulo
       /////////////////////////////////////////////////////
@@ -125,37 +123,45 @@ export default {
           createdat
         }
       }`,
-        variables: {"inputReview":{"content":"review prueba user hola juego Mass effect ","user":"62ba6fe10504d888fadb516c","videogame":"628040559e3552349455db07"}}
+        variables: {
+          inputReview: {
+            content: this.reseñaUsuario,
+            user: this.$MyUserID,
+            videogame: this.$route.params.Id,
+          },
+        },
       });
 
       var config = {
-        method: 'post',
-        url: 'http://173.255.118.17:4040/',
-        headers: { 
-          'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU', 
-          'Content-Type': 'application/json'
+        method: "post",
+        url: "http://173.255.118.17:4040/",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU",
+          "Content-Type": "application/json",
         },
-        data : data
+        data: data,
       };
 
       //const reviews = await axios(config);
       //console.log(reviews, "respuesta");
       //this.reseñas = reviews.data.data.getReviewByGame;
       const newReview = await axios(config);
-      console.log(newReview, "EEEESTAAAAAAA");
+      //console.log(newReview, "EEEESTAAAAAAA");
 
-
-      axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      /*axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        */
       /////////////////////////////////////////////////////
 
       this.crearReseña = !this.crearReseña;
       this.reseñaUsuario = "";
+      this.getReviewsByGame();
     },
     RedirectUser: function (UserID) {
       //Esta función captura el ID del usuario, debe hacer la petición de traer al usuario
@@ -164,7 +170,7 @@ export default {
       this.$router
         .push({
           name: "user",
-          params: {    
+          params: {
             id: UserID,
             username: UserID,
             v: 0,
@@ -198,7 +204,7 @@ export default {
         data: data,
       };
       const reviews = await axios(config);
-      console.log(reviews, "respuesta");
+      //console.log(reviews, "respuesta");
       this.reseñas = reviews.data.data.getReviewByGame;
 
       axios(config)
