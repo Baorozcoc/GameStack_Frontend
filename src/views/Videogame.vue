@@ -134,7 +134,7 @@ export default {
 
       var config = {
         method: "post",
-        url: "http://173.255.118.17:4040/",
+        url: "http://104.197.99.223:4040/",
         headers: {
           Authorization:
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.mmpC2AD3ORWf7D1YGfaNoCiAjIWabm8ET6rJpy1iTIU",
